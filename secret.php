@@ -56,6 +56,7 @@ echo $nm;
 <h2>Ваши заказы:</h2>
  
  <?php
+ session_start();
 if (!(isset($_SESSION['cart']))){
 	echo ' У вас нет заказов';
 	exit;
@@ -66,6 +67,8 @@ if (count($cart) == 0){
 	//exit;
 }
 
+
+
 $mysqli = new mysqli('localhost', 'baturina', '0000', 'kp_baturina');
 $query = "set names utf8";
 $mysqli->query($query);
@@ -73,6 +76,7 @@ $mysqli->query($query);
 $mysqli = new mysqli('localhost', 'baturina', '0000', 'kp_baturina');
 $query = "set names utf8";
 $mysqli->query($query);
+print_r($cart);
 
 echo '<div class="cart-table" id="myCart"><table>';
 	echo'<tr>
@@ -84,12 +88,14 @@ echo '<div class="cart-table" id="myCart"><table>';
 						</tr>';
 $sum = 0;
 for ($i = 0; $i < count($cart); $i++){
-	$query = 'select * from Tovar where id = '.$cart[$i]["nameProduct"].'';
+	$query = 'select * from Tovar where id = '.$cart[$i]["idProduct"].'';
 	$results = $mysqli->query($query);
-	
+	$numProduct = $cart[$i]["numProduct"];
+	echo $numProduct;
 	while($row = $results->fetch_assoc()){
-	$sum = $sum + $row["cena"];
-	echo'<tr>
+		$total = $row["cena"] * $cart[$i]["numProduct"];
+		$sum = $sum + $total;
+		echo'<tr>
 	
 	
 							<td class="items">
@@ -99,13 +105,11 @@ for ($i = 0; $i < count($cart); $i++){
 								<h3><a href="#">'.$row["nazvanie"].'</a></h3>
 							</td>
 							<td class="price">'.$row["cena"].' руб.</td>
-							
-						<td class="qnt"></td>
-							<td class="total">'.$row["cena"].'</td>
-						
+							<td class="qnt">'.$cart[$i]["numProduct"].'</td>
+							<td class="total">'.$total.'</td>
 						</tr>';
+							
 	}
-	
 	
 }
 echo '</table></div>';

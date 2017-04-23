@@ -103,13 +103,13 @@ function showCart(){
 		});	
 }
 
-function addToCart(id){
+function addToCart(id, num = 1){
 	$.ajax({
 			async: false,			
 			type: "POST",
 			url: "./ajax/addToCart.php",
 			dataType:"text",
-			data: 'id=' + id,
+			data: 'id=' + id + '&num=' + num,
 			error: function () {	
 				alert( "Не смог" );
 			},

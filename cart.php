@@ -54,10 +54,7 @@
 	<div id="body">
 		<div class="container">
 			<div id="content" class="full">
-				<div class="cart-table" id="myCart">
-					<table>
-
-					</table>
+				<div id="myCart">
 				</div>
 
 				
