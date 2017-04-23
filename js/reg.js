@@ -8,7 +8,6 @@ function toReg(){
 	//Проверям подтверждение пароля
 	if (pass == confPass){
 		// Если пароли совпадают - пишем в БД
-		alert('Ок');
 		$.ajax({
 			async: false,			
 			type: "POST",
@@ -25,6 +24,7 @@ function toReg(){
 				$('#pass').val('');
 				$('#confPass').val('');
 			    $('#fio').val('');
+			    window.location.href = 'lichcab.php';
 			}
 		});
 	}

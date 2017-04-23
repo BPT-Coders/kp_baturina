@@ -51,7 +51,7 @@
 <tr>
  </table>
 <input type="submit" class="buttons" value="Войти" />
-<a href="pass.html">Забыли пароль?</a><a href="reg2.html">Регистрация</a>
+<a href="pass.html">Забыли пароль?</a><a href="reg.php">Регистрация</a>
 </center>
 </form>
 </body>
