@@ -36,9 +36,9 @@ echo '
 						</div>
 						<div class="actions">
 							<label>Количество</label>
-							<input type="number" min="1" max="10">
+							<input type="number" min="1" max="10" id="numToCart">
 							
-							<input type="button" class="btn-add" onClick="addToCart('.$row["id"].')" value="Добавить в корзину">
+							<input type="button" class="btn-add" onClick="addToCart('.$row["id"].', 0)" value="Добавить в корзину">
 						</div>
 			
 			<div id="comments">';

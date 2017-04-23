@@ -104,6 +104,9 @@ function showCart(){
 }
 
 function addToCart(id, num = 1){
+	if(num != 1){
+		num = $('#numToCart').val();
+	}
 	$.ajax({
 			async: false,			
 			type: "POST",
