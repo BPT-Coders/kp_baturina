@@ -6,12 +6,6 @@ $mysqli->query($query);
 
 $idProduct = $_POST["idProduct"];
 
-// Брать из сессии авторизованного пользователя
-$idPolzovatel = "7";
-
-
-
-
 $query = "select * from Tovar where id= $idProduct";
 $results = $mysqli->query($query);
 while($row = $results->fetch_assoc()){
@@ -55,7 +49,7 @@ echo '
 				
 				$queryCom = "select Polzovateli.FIO, Otzuvu.text  from Otzuvu JOIN Polzovateli on Otzuvu.idpolzovatel = Polzovateli.id  where idtovara = $idProduct limit 3, 1000";
 				$comments = $mysqli->query($queryCom);
-				if (count($comments) > 0){
+				if ($comments->num_rows > 0){
 					echo '<h3 onClick="showCom()" style="cursor: pointer;" id="HhideCom">Показать остальные</h3>';
 					echo '<div id="hideCom" hidden>';
 					while($comment = $comments->fetch_assoc()){
@@ -63,25 +57,43 @@ echo '
 					}
 					echo '</div>';
 				}
-			echo '</div>
+			echo '</div>';
 			
+			session_start();
+	if (isset($_SESSION['Name']))
+	{
+		// Брать из сессии авторизованного пользователя
+		$idPolzovatel;
+		$log = $_SESSION['Name'];
+		$query = "select id from Polzovateli where login = '$log'";
+		$res = $mysqli->query($query);
+			while($row = $res->fetch_assoc()){
+				$idPolzovatel = $row["id"];
+			}
+		
+		echo '
+			<form>
+			  <p>
+			    <label>Ваш отзыв:</label>
+			    <br />
+			    <textarea id="textComment" cols="40" rows="8"></textarea>
+			  </p>
+			  <p>
+			    <input type="hidden" id="idProduct" value="'.$idProduct.'" />
+				<input type="hidden" id="idPolzovatel" value="'.$idPolzovatel.'" />
+			    <input type="button" value="Отправить" onClick="sendComment()"/>
+						
+			  </p>
+			</form>
+								</div>
+			';
+	}
+	else{
+		echo 'Зайдите под своим логином чтобы оставить отзыв';
+	}
+};
 			
-<form>
-  <p>
-    <label>Ваш отзыв:</label>
-    <br />
-    <textarea id="textCmment" cols="40" rows="8"></textarea>
-  </p>
-  <p>
-    <input type="hidden" id="idProduct" value="'.$idProduct.'" />
-	<input type="hidden" id="idPolzovatel" value="'.$idPolzovatel.'" />
-    <input type="button" value="Отправить" onClick="sendComment()"/>
-  
-  </p>
-</form>
-					</div>
-';
-}
+
 
 
 ?>
