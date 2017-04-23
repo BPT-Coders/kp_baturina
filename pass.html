@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>Клеопатра</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" media="all" href="css/style.css">
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/1.js"></script>
+</head>
+<body>
+
+	<header id="header">
+		<div class="container">
+			<a href="./" id="logo" title="Клеопатра">Клеопатра</a>
+			<div class="right-links">
+				<ul>
+					<li><a href="cart.php"><span class="ico-products"></span>Корзина</a></li>
+					<li><a href="secret.php"><span class="ico-account"></span>Личный кабинет</a></li>
+					<?php
+
+					session_start();
+					if (isset($_SESSION['Name']))
+					{
+					$q ='<li><a href="logout.php"><span class="ico-signout"></span>Выход</a></li>';
+						echo $q;
+					};
+					?>
+				</ul>
+			</div>
+		</div>
+
+	<body>
+		<h1>Восстановление пароля</h1>
+		
+	<form action="recPass.php" method="POST">
+			<tr>
+            <td>Введите свой логин :</td>
+			<input type="text" name="login">
+			<input type="submit">
+		</form>
+	</body>
+</html>
